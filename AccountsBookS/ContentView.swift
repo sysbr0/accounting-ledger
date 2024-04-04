@@ -1,21 +1,23 @@
-//
+// contant viow
 //  ContentView.swift
-//  AccountsBookS
+//  firbaseData1
 //
-//  Created by MUHAMMED SABIR on 4.04.2024.
+//  Created by MUHAMMED SABIR on 3.04.2024.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var viewModel : AutViewNodel
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Group {
+            if viewModel.userSession != nil {
+                UserInfo() }
+            else {
+                loginView()
+            }
         }
-        .padding()
     }
 }
 
