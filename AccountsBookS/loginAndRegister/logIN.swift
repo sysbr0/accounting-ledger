@@ -43,6 +43,24 @@ struct loginView: View {
                     textInput(text: $password,
                               title: "Password ",
                               placeholder: "your Password" ,isSecuredfiled: true) // for hiding password
+                    
+                    NavigationLink {
+                        PasswordResetView()
+                      .navigationBarBackButtonHidden(false)
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text("forget password ? ")
+                                .foregroundStyle(.red)
+                       
+                         
+                                .bold()
+                       
+                        }
+                        .font(.system(size: 14))
+                        .foregroundColor(Color(.label))
+                       
+                    }
                 }
                 .padding(.horizontal)
                 .padding(.bottom ,22)
@@ -53,7 +71,7 @@ struct loginView: View {
                 if !email.isEmpty && !password.isEmpty && email.contains("@") {
                 
                     Task{ try await // becuse we are using asybc away
-                        viewModel.signIn(withEnail: email, password: password) }
+                        viewModel.signIn(withEmail: email, password: password) }
                 }
             } label: {
                 HStack {

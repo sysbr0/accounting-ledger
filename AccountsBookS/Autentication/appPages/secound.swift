@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct secound: View {
+    
+    @EnvironmentObject var siewModel: AutViewNodel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(siewModel.curentuser?.fullname ?? "np  email")
+        
+        Button {
+            siewModel.signout()
+        } label: {
+            SettingsLabel(imagename: "power", title: "Log Out", color: Color(.red))
+        }
     }
 }
 

@@ -15,6 +15,8 @@ struct User : Identifiable , Codable { // id to mach currentUser
     let email : String
     
     var intials : String {
+        
+        
     let formatter = PersonNameComponentsFormatter()
         if let componnets = formatter.personNameComponents(from: fullname) {
         formatter.style = .abbreviated
@@ -22,6 +24,7 @@ struct User : Identifiable , Codable { // id to mach currentUser
     }
         return " "
     }
+    
 }
 
 extension User {

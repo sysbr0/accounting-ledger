@@ -17,9 +17,18 @@ protocol AuthnticationFormProtocol {
 }
 @MainActor
 class AutViewNodel : ObservableObject {
+    
+   
+    
+    
     @Published var userSession : FirebaseAuth.User?
     @Published var curentuser : User? // from model/user
-    
+    @Published var showAlert = false
+    @Published var darkmode = false {
+          didSet {
+              UserDefaults.standard.set(darkmode, forKey: "darkmode")
+          }
+      }
     
     init() {
         self.userSession =  Auth.auth().currentUser
@@ -27,6 +36,7 @@ class AutViewNodel : ObservableObject {
         
         Task{
             await fatchUser()
+            print(curentuser?.email ?? " no user  ")
         }
     }
     
@@ -34,7 +44,7 @@ class AutViewNodel : ObservableObject {
     
     
     
-    func signIn(withEnail email :String  , password : String) async  throws  {
+    func signIn(withEmail email :String  , password : String) async  throws  {
         
      
         do {
@@ -76,16 +86,66 @@ class AutViewNodel : ObservableObject {
         }
     }
     
-    func deleteAccount() {
-        
-    }
+
     func fatchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else  {return}
         
         guard  let snapshot =  try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
         self.curentuser =  try?  snapshot.data(as: User.self)
         
-        
+   
  
     }
+    
+    
+    
+    func changeEmail(_ newEmail: String) {
+        let auth = Auth.auth()
+        auth.currentUser?.updateEmail(to: newEmail) { error in
+          
+           
+        }
+    } // change email
+
+
+    func darkmodefunc() {
+        self.darkmode = true
+        
+    } // dark mode
+    
+    func showdetiles() {
+        print(self.curentuser?.fullname ?? "nothing ")
+    } // show worning
+    
+    func DeleteAccount() {
+            do {
+                guard let user = Auth.auth().currentUser else {
+                    print("No user is currently signed in.")
+                    return}
+              
+                
+                user.delete { error in
+                    if error != nil {
+                    // An error happened.
+                  } else {
+               print("eccountdeleted")
+                  }
+                }
+                self.userSession = nil
+                self.curentuser = nil
+                
+            } // delete account
+            
+           
+            
+            
+       
+
+        }
+    func ForgetPassword(withEmail email :String ) async  throws {
+        print(email)
+        
+    }
+    
+
 }

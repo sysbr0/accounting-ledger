@@ -67,6 +67,25 @@ struct Icons: View {
             return "gear.circle.fill" // add
         case "dark":
             return "moon.circle.fill" // add
+        case "email":
+        return "envelope.circle.fill" // add
+        case "home":
+             return "house.circle.fill" // add
+        case "bell":
+            return "bell.circle.fill" // add
+        case "power":
+            return "power.circle.fill" // add
+        case "DeletePerson":
+            return "person.crop.circle.badge.minus" // add
+        case "lock":
+            return "lock.circle" // add
+          
+            
+       
+            
+         
+            
+
         default:
             return "exclamationmark.bubble.circle.fill"
         }
