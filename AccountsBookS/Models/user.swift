@@ -13,6 +13,7 @@ struct User : Identifiable , Codable { // id to mach currentUser
     let id : String
     let fullname : String
     let email : String
+    let profileImgeURL : URL
     
     var intials : String {
         
@@ -28,5 +29,5 @@ struct User : Identifiable , Codable { // id to mach currentUser
 }
 
 extension User {
-    static var MOC_USER = User(id: NSUUID().uuidString, fullname: "sys br " , email: "sysbr@gmail.com")
+    static var MOC_USER = User(id: NSUUID().uuidString, fullname: "sys br " , email: "sysbr@gmail.com", profileImgeURL: URL(string : "SYSBR.COM")!)
 }

@@ -39,6 +39,7 @@
 		C82880FC2BBECA9500D37E02 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C82880FB2BBECA9500D37E02 /* FirebaseFirestore */; };
 		C82880FE2BBECA9500D37E02 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C82880FD2BBECA9500D37E02 /* FirebaseFirestoreSwift */; };
 		C82881002BBECA9500D37E02 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C82880FF2BBECA9500D37E02 /* FirebaseStorage */; };
+		C8B148492BFA872F002F3D43 /* imgePiccer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B148482BFA872F002F3D43 /* imgePiccer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		C82880E52BBEC27100D37E02 /* SittingLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SittingLabels.swift; sourceTree = "<group>"; };
 		C82880E72BBEC27C00D37E02 /* TextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
 		C82880EA2BBEC2DF00D37E02 /* Authuntication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authuntication.swift; sourceTree = "<group>"; };
+		C8B148482BFA872F002F3D43 /* imgePiccer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imgePiccer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 		C82880C82BBEC1A500D37E02 /* AccountsBookS */ = {
 			isa = PBXGroup;
 			children = (
+				C8B148472BFA8715002F3D43 /* Imge */,
 				C802D5482BF11C0C00900D07 /* GoogleService-Info.plist */,
 				C802D5222BF0D74F00900D07 /* bellview */,
 				C802D51F2BF0D5D600900D07 /* peopleView */,
@@ -227,6 +230,14 @@
 				C8036D812BD3171000FB01F1 /* sql.swift */,
 			);
 			path = authnticationViewNodel;
+			sourceTree = "<group>";
+		};
+		C8B148472BFA8715002F3D43 /* Imge */ = {
+			isa = PBXGroup;
+			children = (
+				C8B148482BFA872F002F3D43 /* imgePiccer.swift */,
+			);
+			path = Imge;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +342,7 @@
 				C82880E42BBEC25D00D37E02 /* icon.swift in Sources */,
 				C802D51E2BF0D55600900D07 /* mainview.swift in Sources */,
 				C802D5242BF0DB1E00900D07 /* bellview.swift in Sources */,
+				C8B148492BFA872F002F3D43 /* imgePiccer.swift in Sources */,
 				C82880DC2BBEC20100D37E02 /* createAccount.swift in Sources */,
 				C802D5432BF0F0B500900D07 /* forgetpassword.swift in Sources */,
 				C8036D822BD3171000FB01F1 /* sql.swift in Sources */,

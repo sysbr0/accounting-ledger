@@ -107,10 +107,16 @@ struct UserInfo: View {
                
             }
         }
-        
-        
         .preferredColorScheme(veiwModel.darkmode ? .dark : .light)
         .ignoresSafeArea()
+        if veiwModel.curentuser == nil {
+            Text("Please reopen the application")
+        }
+            
+                
+        
+        
+    
     }
 }
 

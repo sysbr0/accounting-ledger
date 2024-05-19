@@ -10,7 +10,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
-
+import FirebaseStorage
 
 protocol AuthnticationFormProtocol {
     var formIsVaied: Bool {get}
@@ -18,9 +18,9 @@ protocol AuthnticationFormProtocol {
 @MainActor
 class AutViewNodel : ObservableObject {
     
+    
+    @Published var errorMessage: String = "" // for displying messge
    
-    
-    
     @Published var userSession : FirebaseAuth.User?
     @Published var curentuser : User? // from model/user
     @Published var showAlert = false
@@ -51,6 +51,7 @@ class AutViewNodel : ObservableObject {
             print(email)
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
+            
            // await fatchUser()
         }
         catch{
@@ -64,7 +65,7 @@ class AutViewNodel : ObservableObject {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
-            let user = User(id : result.user.uid, fullname: fullname , email: email)
+            let user = User(id : result.user.uid, fullname: fullname , email: email , profileImgeURL : URL(string: "sysbr.com")!)
             let encodedUser = try Firestore.Encoder().encode(user)
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser) // get informatiom
             await fatchUser()
@@ -146,6 +147,73 @@ class AutViewNodel : ObservableObject {
         print(email)
         
     }
+    
+    
+    
+    
+    func resetPassword(email: String) {
+            let db = Firestore.firestore()
+            
+            db.collection("users")
+                .whereField("email", isEqualTo: email)
+                .getDocuments { [weak self] (querySnapshot, error) in
+                    guard let self = self else { return }
+                    if let error = error {
+                        // chek errop
+                        self.errorMessage = error.localizedDescription
+                        self.showAlert = true
+                    } else if let documents = querySnapshot?.documents {
+                        if documents.isEmpty {
+                           
+                            self.errorMessage = "Email not found"
+                            self.showAlert = true
+                        } else {
+                           
+                            Auth.auth().sendPasswordReset(withEmail: email) { error in
+                                if let error = error {
+                                   
+                                    self.errorMessage = error.localizedDescription
+                                    self.showAlert = true
+                                } else {
+                                   /// send reset passwoeeed to the email
+                                    print("Password reset email sent successfully")
+                                    self.showAlert = true
+                                    self.errorMessage = "Password reset email sent successfully"
+                                }
+                            }
+                        }
+                    }
+                }
+        }
+    
+    func uploadProfileImage(image: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
+                guard let imageData = image.jpegData(compressionQuality: 0.75) else {
+                    completion(.failure(NSError(domain: "ImageError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid image data"])))
+                    return
+                }
+                
+                guard let userId = userSession?.uid else {
+                    completion(.failure(NSError(domain: "AuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not logged in"])))
+                    return
+                }
+                
+                let storageRef = Storage.storage().reference().child("profile_images/\(userId).jpg")
+                
+                storageRef.putData(imageData, metadata: nil) { metadata, error in
+                    if let error = error {
+                        completion(.failure(error))
+                        return
+                    }
+                    
+                    storageRef.downloadURL { url, error in
+                        if let url = url {
+                            completion(.success(url))
+                        } else if let error = error {
+                            completion(.failure(error))
+                        }
+                    }
+                }
+            }
     
 
 }

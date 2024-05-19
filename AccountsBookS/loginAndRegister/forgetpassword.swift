@@ -10,10 +10,7 @@ struct forgetpassword: View {
     @State private var error:String?
   
     @EnvironmentObject var viewModel : AutViewNodel
-    init() {
-        // Customize navigation bar title appearance
-        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont.systemFont(ofSize: 14)] // Set the desired font size here
-    }
+
     
     var body: some View {
         NavigationView {
@@ -34,12 +31,6 @@ struct forgetpassword: View {
                 
                     
                     
-                    VStack{
-                        Icons(customIcon: "lock", size: 100, color: .black)
-                        Text(" write your Email and you will resive a link to reset your password")
-                            .padding(10)
-                     
-                    }
                     Spacer()
                         VStack(spacing : 12 ){
                            textInput(text: $email,
@@ -68,7 +59,11 @@ struct forgetpassword: View {
                                 .fontWeight(.semibold)
                             Icons(customIcon: "lock", size: 20, color: Color(.white))
                          
-                            
+                                  }
+                        .padding()
+                        .alert(isPresented: $viewModel.showAlert) {
+                            Alert(title: Text("Error"), message: Text(viewModel.errorMessage), dismissButton: .default(Text("OK")))
+                      
                         }
                         
                         .foregroundColor(Color(.white))
@@ -77,7 +72,7 @@ struct forgetpassword: View {
                     }
                     .background(Color(.black))
                    
-                    .opacity(formIsVaied ? 1.0 : 0.5)
+              
                     .border(Color(.label))
                     .cornerRadius(8)
                    
@@ -97,15 +92,6 @@ struct forgetpassword: View {
     }
 
 
-extension  forgetpassword  :  AuthnticationFormProtocol {
-    var formIsVaied: Bool {
-        return !email.isEmpty
-        && email.contains("@")
-        &&   email.contains(".")
-       
-    
-    }
-}
 
 #Preview {
     forgetpassword()
