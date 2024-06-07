@@ -50,8 +50,8 @@ struct forgetpassword: View {
                         if !email.isEmpty  && email.contains("@") {
                        
                         
-                            Task{ try await // becuse we are using asybc away
-                                viewModel.ForgetPassword(withEmail: email) }
+                   //         Task{ try await // becuse we are using asybc away
+                      //          viewModel.ForgetPassword(withEmail: email) }
                         }
                     } label: {
                         HStack {

@@ -88,7 +88,7 @@ struct loginView: View {
             }
             .background(Color(.black))
            
-            .opacity(formIsVaied ? 1.0 : 0.5)
+            .opacity(formIsValid ? 1.0 : 0.5)
             .border(Color(.label))
             .cornerRadius(8)
            
@@ -119,7 +119,11 @@ struct loginView: View {
 
 
 extension  loginView  :  AuthnticationFormProtocol {
-    var formIsVaied: Bool {
+
+    
+ 
+    
+    var formIsValid: Bool {
         return !email.isEmpty
         && email.contains("@")
         &&   email.contains(".")

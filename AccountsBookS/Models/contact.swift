@@ -1,18 +1,19 @@
-//
-//  contact.swift
-//  AccountsBookS
-//
-//  Created by MUHAMMED SABIR on 7.06.2024.
-//
 
-import SwiftUI
+import FirebaseFirestore
 
-struct contact: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+struct Contact: Identifiable {
+    let id: String
+    let userId: String
+    let dateAdded: Timestamp
 }
 
-#Preview {
-    contact()
+
+
+struct ChatMessage: Identifiable {
+    let id: String
+    let senderId: String
+    let receiverId: String
+    let text: String
+    let timestamp: Timestamp
+    let amount: Float?
 }

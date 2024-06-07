@@ -11,10 +11,10 @@ struct secound: View {
     
     @EnvironmentObject var siewModel: AutViewNodel
     var body: some View {
-        Text(siewModel.curentuser?.fullname ?? "np  email")
+     //   Text(siewModel.curentuser?.fullname ?? "np  email")
         
         Button {
-            siewModel.signout()
+         //   siewModel.signout()
         } label: {
             SettingsLabel(imagename: "power", title: "Log Out", color: Color(.red))
         }

@@ -31,3 +31,18 @@ struct User : Identifiable , Codable { // id to mach currentUser
 extension User {
     static var MOC_USER = User(id: NSUUID().uuidString, fullname: "sys br " , email: "sysbr@gmail.com", profileImgeURL: URL(string : "SYSBR.COM")!)
 }
+struct MyContacts: Identifiable { // Conform to Identifiable
+    let id: String
+    let name: String
+    let email: String
+    let imageURL: URL?
+    var balance: Float = 0.0
+    
+    init(id: String, name: String, email: String, imageURL: URL?) {
+        self.id = id
+        self.name = name
+        self.email = email
+        self.imageURL = imageURL
+    }
+}
+

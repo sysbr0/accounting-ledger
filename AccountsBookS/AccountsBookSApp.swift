@@ -10,11 +10,13 @@ import SwiftUI
 import Firebase
 @main
 struct AccountsBookSApp: App {
-    
+
+
     
     @StateObject var veiwModel = AutViewNodel()
     init(){
         FirebaseApp.configure()
+        
           
     }
 
@@ -22,6 +24,8 @@ struct AccountsBookSApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(veiwModel) // her
+       
+         
         }
     }
 }

@@ -19,8 +19,9 @@ struct edit: View {
     
     
     var body: some View {
+
         
-        if viewModel.curentuser != nil {
+       if viewModel.currentUser != nil {
             
          
             
@@ -36,7 +37,7 @@ struct edit: View {
                             showAlert.toggle()
                         }
                         label : {
-                            Icons(customIcon: "edit", size: 30, color: viewModel.darkmode ? .white : .black)
+                            Icons(customIcon: "edit", size: 30, color: viewModel.darkMode ? .white : .black)
                         }
                         .alert("Login", isPresented: $showAlert, actions: {
                             TextField("Email ", text: $emailchange)
